@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const { connectTodatabase } = require('./db/database-connection')
+
+//Routers
 const personagemRouter = require('./personagem/personagem.router')
 //const { MongoClient, ObjectId } = require('mongodb')
 
@@ -8,46 +10,24 @@ const personagemRouter = require('./personagem/personagem.router')
 
 // Declaramos a função main()
 async function main() {
-// FIX: utilizar connectToDatabase() e receber o DB 
+// conectamos no Db
  await connectTodatabase()
   
- // const collection = db.collection('personagem')
+ //Inicializamos o express
 
  const app = express()
   ///middlewares
   // Sinalizo para o Express que estamos usando JSON no Body
  app.use(express.json())
 
-
+//Endpoint de  Hello World
  app.get('/', function (req, res) {
     res.send('Hello World')
   })
 
+  //Routers
   app.use('/personagem', personagemRouter)
 
-// app.use('/personagem',  personagemRouter)
-//FIX: mover isso para pasta 'personagem'
-/*
-
- 
-
- 
-  
- // Endpoint Create [POST] /personagem
-  //app.post('/personagem', async function (req, res) {
-   
-
-
- 
-
-   
-  })
-
-
-  
-  
-
-  */
 
   app.listen(3000, function (){
     console.log('Servidor rodando em http:localhost:3000')
