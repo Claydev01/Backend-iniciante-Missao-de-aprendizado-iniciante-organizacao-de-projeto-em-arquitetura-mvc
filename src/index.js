@@ -28,14 +28,6 @@ async function main() {
 // app.use('/personagem',  personagemRouter)
 //FIX: mover isso para pasta 'personagem'
 /*
-  // Endpoint Read All [GET] /personagem
-  app.get('/personagem', async function (req, res) {
-    // Acessamos a lista de itens na collection do MongoDB
-    const itens = await collection.find().toArray()
-
-    // Enviamos a lista de itens como resultado
-    res.send(itens)
-  })
 
   // Endpoint Read By ID [GET] /personagem/:id
   app.get('/personagem/:id', async function (req, res) {
