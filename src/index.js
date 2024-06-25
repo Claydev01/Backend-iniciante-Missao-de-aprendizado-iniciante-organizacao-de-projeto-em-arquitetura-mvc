@@ -23,6 +23,8 @@ async function main() {
     res.send('Hello World')
   })
 
+  app.use('/personagem', personagemRouter)
+
 // app.use('/personagem',  personagemRouter)
 //FIX: mover isso para pasta 'personagem'
 /*
