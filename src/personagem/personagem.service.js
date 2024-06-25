@@ -1,5 +1,10 @@
+const { getDatabase } = require("../db/database-connection")
+
+function getCollection(){
+  return getDatabase().collection('personagem')
+}
 function readAll() {
-  return[]
+  return getCollection().find().toArray()
 }
 
 
