@@ -47,28 +47,36 @@ async function create(req, res) {
 
 async function updateById(req, res) {
 
-    // Acessamos o ID dos parâmetros de rota
-    const id = req.params.id
+  // Acessamos o ID dos parâmetros de rota
+  const id = req.params.id
 
-    // Acessamos o Body da requisição
-    const newItem = req.body
+  // Acessamos o Body da requisição
+  const newItem = req.body
 
-    // Checar se o `nome` está presente no body
-    if (!newItem || !newItem.nome) {
-      return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
-    }
+  // Checar se o `nome` está presente no body
+  if (!newItem || !newItem.nome) {
+    return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
+  }
 
 
-    //Atualizamos na collection o novoItem pelo Id, usando service
-    await service.updateById(id,newItem)
-    // Enviamos uma mensagem de sucesso
-    res.send(newItem)
+  //Atualizamos na collection o novoItem pelo Id, usando service
+  await service.updateById(id, newItem)
+  // Enviamos uma mensagem de sucesso
+  res.send(newItem)
 }
 
 
 
-function deleteById(req, res) {
-  res.send('Delete By ID')
+async function deleteById(req, res) {
+  // Acessamos o parâmetro de rota
+  const id = req.params.id
+
+   // Remover do DB usando o ID,via service
+   await service.deleteById(id)
+
+  // Enviamos uma mensagem de sucesso
+  res.send('Item removido com sucesso: ' + id)
+
 }
 module.exports = {
   readAll,
