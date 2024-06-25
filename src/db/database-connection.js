@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb")
+const { MongoClient } = require('mongodb')
 
 // Preparamos as informações de acesso ao banco de dados
 const dbUrl = process.env.DATABASE_URL
