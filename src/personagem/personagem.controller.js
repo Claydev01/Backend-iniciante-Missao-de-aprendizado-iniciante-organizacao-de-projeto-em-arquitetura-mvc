@@ -1,6 +1,6 @@
 const service = require('./personagem.service')
 
-async function readAll(res,res){
+async function readAll(res, res) {
 
   //Acessamos a lista de personagens no service
   const itens = await service.readAll()
@@ -10,32 +10,49 @@ async function readAll(res,res){
 }
 
 
-async function readById(req,res){
+async function readById(req, res) {
   // Acessamos o parâmetro de rota ID
   const id = req.params.id
- //Acessamos o personagem no service  através do ID
+  //Acessamos o personagem no service  através do ID
   const item = await service.readById(id)
 
-   // Checamos se o item obtido é existente
-   if (!item) {
+  // Checamos se o item obtido é existente
+  if (!item) {
     return res.status(404).send('Item não encontrado.')
 
   }
-   res.send(item)
+  res.send(item)
 }
 
-function create(req,res){
-  res.send('create By ID')
+async function create(req, res) {
+
+  // Acessamos o Body da Requisição
+  const newItem = req.body
+
+  // Checar se o `nome` está presente no body
+  if (!newItem || !newItem.nome) {
+    return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
+  }
+
+  // Adicionamos no DB através do service
+  await service.create(newItem)
+
+  // Exibimos uma mensagem de sucesso
+  res.status(201).send(newItem)
+
+
 }
 
-function updateById(req,res){
+
+
+function updateById(req, res) {
   res.send('Update By ID')
 }
 
-function deleteById(req,res){
+function deleteById(req, res) {
   res.send('Delete By ID')
 }
-module.exports ={
+module.exports = {
   readAll,
   readById,
   create,
